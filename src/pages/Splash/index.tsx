@@ -2,9 +2,10 @@ import React from "react";
 import LinearGradient from 'react-native-linear-gradient';
 
 import { View, Text, StatusBar } from "react-native";
-import { Container, CustomText, CustomButton, CustomButtonText, OutlineButton } from './styles';
+import { Container, CustomText } from './styles';
 
-import colors from "../../theme/colors";
+import PrimaryButton from "../../components/atoms/PrimaryButton";
+import OutlineButton from "../../components/atoms/OutlineButton";
 
 const SplashScreen: React.FC = () => {
 
@@ -26,15 +27,11 @@ const SplashScreen: React.FC = () => {
     return (
       <>
         <View style={{ justifyContent: 'center' }}>
-          <CustomButton backgroundColor="white">
-            <CustomButtonText textColor={colors.primary}>Entrar</CustomButtonText>
-          </CustomButton>
 
-          <OutlineButton>
-            <CustomButtonText textColor={colors.background}>Cadastrar</CustomButtonText>
-          </OutlineButton>
+          <PrimaryButton>Entrar</PrimaryButton>
+          <OutlineButton>Cadastrar</OutlineButton>
 
-          <Text style={{ color: 'rgba(255, 255, 255, 0.7)', marginTop: 25, textAlign: 'center' }}>
+          <Text style={{ color: 'rgba(255, 255, 255, 0.6)', marginTop: 25, textAlign: 'center' }}>
             Termos de serviço
           </Text>
         </View>

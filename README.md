@@ -1,6 +1,9 @@
-Estrutura de rotas:
+## AuthApp
 
-auth.routes -> Rotas em que o usuário acessa sem efetuar o login no aplicativo;
-app.routes -> Rotas de acesso depois de efetuar login;
+- Padrões de mensagems dos commits:
 
-Context.Provider -> Provedor de informações dentro daquele contexto
+  int: Interfaces
+  feat: Features
+  bug: Correções de bugs
+  test: Implementação de testes
+  est: Estruturas
