@@ -19,7 +19,7 @@ import AuthContext from "../../contexts/auth";
 import Input from '../../components/Input';
 
 const SignIn: React.FC = () => {
-  const { signed, signIn } = useContext(AuthContext); // Extrair as informações do contexto
+  const { signed, signIn } = useContext(AuthContext);
 
   console.log('User logged? ->', signed);
 
@@ -29,19 +29,18 @@ const SignIn: React.FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#363E43" />
+      <StatusBar barStyle="light-content" backgroundColor="#7BDE9E" />
       <Container>
         <Heading>
-          <Logo>Cryfin</Logo>
-          <Subtitle>Find your money</Subtitle>
+          {/* <Logo source={logo} /> */}
+          <Subtitle>Find yourself</Subtitle>
         </Heading>
 
         <InputArea>
-          <Input placeholder="Digite seu nome de usuário"/>
-          {/* icon={} */}
-          <Input placeholder="Digite sua senha" />
+          <Input placeholder="Email" />
+          <Input placeholder="Senha" />
 
-          <CustomButton>
+          <CustomButton onPress={handleSignIn}>
             <CustomButtonText>Entrar</CustomButtonText>
           </CustomButton>
 
@@ -53,10 +52,6 @@ const SignIn: React.FC = () => {
         </SignMessageButton>
       </Container>
     </>
-
-    // <View style={styles.container}>
-    //   <Button title="Entrar" onPress={handleSignIn} />
-    // </View>
   );
 };
 

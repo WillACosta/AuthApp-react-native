@@ -1,8 +1,8 @@
 export default {
-  primary: '#000014',
-  secondary: '#efeff1',
-  text: '#efeff1',
-  background: '#363e43',
+  primary: '#17B7BD',
+  secondary: '#7BDE9E',
+  text: '#101010',
+  background: '#ededed',
   success: '#14b866',
   danger: '#ec1414',
   info: '#bf94ff',

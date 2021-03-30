@@ -7,7 +7,7 @@ import SplashScreen from '../pages/Splash';
 const AuthStack = createStackNavigator();
 
 const AuthRoutes: React.FC = () => (
-  <AuthStack.Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
+  <AuthStack.Navigator initialRouteName="SplashScreen" screenOptions={{ headerShown: false }}>
     <AuthStack.Screen name="Splash" component={SplashScreen} />
     <AuthStack.Screen name="SignIn" component={SignIn} />
   </AuthStack.Navigator>

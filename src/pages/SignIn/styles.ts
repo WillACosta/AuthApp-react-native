@@ -1,28 +1,24 @@
 import styled from "styled-components/native";
+import colors from "../../theme/colors";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
   justify-content: center;
   padding: 40px 0 30px;
-  background: #363e43;
-`;
-
-export const LoginButton = styled.Button`
-  padding-top: 10px;
 `;
 
 export const Heading = styled.View`
-  text-align: center;
+  align-items: center;
 `;
 
-export const Logo = styled.Text`
-  font-size: 28px;
-  color: #ededed;
+export const Logo = styled.Image`
+  height: 300px;
+  width: 300px;
 `;
 
 export const Subtitle = styled.Text`
-  color: #ededed;
+  color: ${colors.text};
 `;
 
 export const InputArea = styled.View`
@@ -33,15 +29,16 @@ export const InputArea = styled.View`
 export const SignInput = styled.TextInput``;
 
 export const CustomButton = styled.TouchableOpacity`
-  height: 60px;
-  background: #268596;
-  border-radius: 30px;
+  height: 50px;
+  background: ${colors.primary};
+  color: ${colors.background};
+  border-radius: 10px;
   justify-content: center;
   align-items: center;
 `;
 
 export const CustomButtonText = styled.Text`
-  color: #fff;
+  color: ${colors.background};
   font-size: 18px;
 `;
 
@@ -54,12 +51,12 @@ export const SignMessageButton = styled.View`
 
 export const SignMessageButtonText = styled.Text`
   font-size: 16px;
-  color: #ededed;
+  color: ${colors.text};
 `;
 
 export const SignMessageButtonTextBold = styled.Text`
   font-size: 16px;
-  color: #ededed;
+  color: ${colors.text};
   font-weight: 700;
   margin-left: 5px;
 `;
