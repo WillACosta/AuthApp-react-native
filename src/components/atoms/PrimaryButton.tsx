@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from "styled-components/native";
 
-import colors from "../../theme/colors";
-
 import {
   PrimaryButtonProps,
   PrimaryButtonTextProps,
   ThemeButtonProps,
 } from "../../models/components.model";
+
+import { Typography } from '../../constants';
 
 const ButtonField = styled.TouchableOpacity<PrimaryButtonProps>`
   background: ${(props) => props.backgroundColor};
@@ -19,19 +19,9 @@ const ButtonField = styled.TouchableOpacity<PrimaryButtonProps>`
   border-radius: 8px;
 `;
 
-const OutlineButton = styled.TouchableOpacity`
-  background: transparent;
-  margin-top: 20px;
-  height: 60px;
-  border: 1px solid ${colors.background};
-
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-`;
-
 const ButtonText = styled.Text<PrimaryButtonTextProps>`
-  font-size: 18px;
+  font-size: ${Typography.h4};
+  font-family: ${Typography.fontFamilyRegular};
   color: ${(props) => props.textColor};
 `;
 

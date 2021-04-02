@@ -29,7 +29,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       const storagedUser = await AsyncStorage.getItem('@authApp:user'); // Usar multiGet
       const storagedToken = await AsyncStorage.getItem('@authApp:token');
 
-      if(storagedUser && storagedToken) {
+      if (storagedUser && storagedToken) {
         setUser(JSON.parse(storagedUser));
         api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
 
@@ -53,7 +53,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   function signOut() {
-    AsyncStorage.clear().then(() =>  setUser(null))
+    AsyncStorage.clear().then(() => setUser(null))
   }
 
   return (

@@ -1,21 +1,29 @@
 import React, { useContext, useState } from "react";
-import { StatusBar, TextInput, View, Text, TouchableOpacity } from "react-native";
-import { NavigationProps } from "../../models/navigation.models";
-
-import {
-  Container,
-  Heading,
-  Subtitle,
-  Title,
-  BackButton
-} from './styles';
+import { StatusBar } from "react-native";
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 
+import {
+  Container,
+  FormContainer,
+  Heading,
+  Subtitle,
+  Title,
+  BackButton,
+  PasswordRecovery,
+  PasswordRecoveryText,
+  InputField,
+  InputLabel,
+  InputText,
+  TogglePasswordButton
+} from './styles';
+
+import { NavigationProps } from "../../models/navigation.models";
+import { COLORS } from "../../constants";
+
+import GradientButton from '../../components/atoms/GradientButton';
 import AuthContext from "../../contexts/auth";
-import colors from "../../theme/colors";
-import PrimaryButton from '../../components/atoms/PrimaryButton';
 
 const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
   const { signed, signIn } = useContext(AuthContext);
@@ -30,7 +38,7 @@ const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
     return (
       <>
         <BackButton onPress={() => navigation.navigate('Splash')}>
-          <IonIcons name='arrow-back' size={30} color={colors.gray} />
+          <IonIcons name='arrow-back' size={30} color={COLORS.text} />
         </BackButton>
 
         <Heading>
@@ -45,66 +53,51 @@ const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-      <View style={{ marginTop: 10, marginHorizontal: 4 }}>
+      <FormContainer>
 
-        <View style={{ marginTop: 5 }}>
-          <Text style={{ color: colors.gray }}>Email</Text>
+        <InputField>
+          <InputLabel>Email</InputLabel>
+          <InputText
+            keyboardType="email-address"
+            placeholderTextColor={COLORS.gray}
+            selectionColor={COLORS.gray}
+          />
+        </InputField>
 
-          <TextInput
-            style={{
-              marginVertical: 3,
-              borderBottomColor: colors.primary,
-              borderBottomWidth: 1,
-              height: 40
-            }}
-            placeholder="Digite seu email"
-            placeholderTextColor={colors.gray}
-            selectionColor={colors.gray}>
-          </TextInput>
-        </View>
-
-        <View style={{ marginTop: 15 }}>
-          <Text style={{ color: colors.gray }}>Senha</Text>
-          <TextInput
-            style={{
-              marginVertical: 3,
-              borderBottomColor: colors.primary,
-              borderBottomWidth: 1,
-              height: 40
-            }}
-            placeholder="Digite sua senha"
-            placeholderTextColor={colors.gray}
-            selectionColor={colors.gray}
+        <InputField>
+          <InputLabel>Senha</InputLabel>
+          <InputText
+            placeholderTextColor={COLORS.gray}
+            selectionColor={COLORS.gray}
             secureTextEntry={!showPassword}
           />
-
-          <TouchableOpacity
-            style={{ position: 'absolute', right: 0, bottom: 10, height: 30, width: 30 }}
-            onPress={() => setShowPassword(!showPassword)}
-          >
-            <Icon
-              name={showPassword ? 'eye-with-line' : 'eye'}
+          <TogglePasswordButton onPress={() => setShowPassword(!showPassword)}>
+            <Icon name={showPassword ? 'eye-with-line' : 'eye'}
               size={18}
-              color={colors.primary}
+              color={COLORS.primary}
             />
-          </TouchableOpacity>
-        </View>
+          </TogglePasswordButton>
+        </InputField>
 
-        <PrimaryButton
+        <PasswordRecovery>
+          <PasswordRecoveryText>Esqueceu sua senha?</PasswordRecoveryText>
+        </PasswordRecovery>
+
+        <GradientButton
           onPressFn={handleSignIn}
-          backgroundColor={colors.primary}
-          textColor={colors.background}
+          backgroundColor={COLORS.linear}
+          textColor={COLORS.white}
         >
           Entrar
-        </PrimaryButton>
+        </GradientButton>
 
-      </View>
+      </FormContainer>
     );
   }
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.background} />
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
       <Container>
         {renderHeader()}
         {renderForm()}
