@@ -4,6 +4,6 @@
 
   int: Interfaces
   feat: Features
-  bug: Correções de bugs
   test: Implementação de testes
   est: Estruturas
+  fix: Resoluções de problemas

@@ -6,8 +6,8 @@ import colors from "../../theme/colors";
 import {
   PrimaryButtonProps,
   PrimaryButtonTextProps,
+  ThemeButtonProps,
 } from "../../models/components.model";
-
 
 const ButtonField = styled.TouchableOpacity<PrimaryButtonProps>`
   background: ${(props) => props.backgroundColor};
@@ -35,10 +35,10 @@ const ButtonText = styled.Text<PrimaryButtonTextProps>`
   color: ${(props) => props.textColor};
 `;
 
-const PrimaryButton: React.FC = ({ children }) => {
+const PrimaryButton: React.FC<ThemeButtonProps> = ({ children, backgroundColor, textColor, onPressFn }) => {
   return (
-    <ButtonField backgroundColor={colors.background}>
-      <ButtonText textColor={colors.primary}>{children}</ButtonText>
+    <ButtonField backgroundColor={backgroundColor} onPress={onPressFn}>
+      <ButtonText textColor={textColor}>{children}</ButtonText>
     </ButtonField>
   );
 }

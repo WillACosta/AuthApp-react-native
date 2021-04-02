@@ -4,10 +4,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import { View, Text, StatusBar } from "react-native";
 import { Container, CustomText } from './styles';
 
+import { NavigationProps } from "../../models/navigation.models";
+
 import PrimaryButton from "../../components/atoms/PrimaryButton";
 import OutlineButton from "../../components/atoms/OutlineButton";
+import colors from "../../theme/colors";
 
-const SplashScreen: React.FC = () => {
+const SplashScreen: React.FC<NavigationProps> = ({ navigation }) => {
 
   function renderHeader() {
     return (
@@ -28,7 +31,13 @@ const SplashScreen: React.FC = () => {
       <>
         <View style={{ justifyContent: 'center' }}>
 
-          <PrimaryButton>Entrar</PrimaryButton>
+          <PrimaryButton
+            backgroundColor={colors.background}
+            textColor={colors.primary}
+            onPressFn={() => navigation.navigate('SignIn')}>
+            Entrar
+          </PrimaryButton>
+
           <OutlineButton>Cadastrar</OutlineButton>
 
           <Text style={{ color: 'rgba(255, 255, 255, 0.6)', marginTop: 25, textAlign: 'center' }}>
