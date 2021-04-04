@@ -1,55 +1,49 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as AuthService from "../services/Auth";
-import api from '../services/api';
+import APIKit, { setClientToken } from '../services/api';
 
-interface User {
-  name: string;
-  email: string;
-}
+import { AuthContextData, LoginData, User } from '../models/contexts.model';
 
-interface AuthContextData {
-  signed: boolean,
-  user: User | null,
-  loading: boolean,
-  signIn(): Promise<void>,
-  signOut(): void
-}
-
-/** Responsável por informar se o usuário está logado ou não e redirecionar para o componente correto */
-const AuthContext = createContext<AuthContextData>({} as AuthContextData); // Força a tipagem do objeto vazio
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(false); // Problem?
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getStorageData() {
-      const storagedUser = await AsyncStorage.getItem('@authApp:user'); // Usar multiGet
-      const storagedToken = await AsyncStorage.getItem('@authApp:token');
+      const storedToken = await AsyncStorage.getItem('@authApp:token');
 
-      if (storagedUser && storagedToken) {
-        setUser(JSON.parse(storagedUser));
-        api.defaults.headers['Authorization'] = `Bearer ${storagedToken}`;
+      if (storedToken) {
+        const fakeUser: User = { name: 'Will', email: 'will@email.com' };
+        setUser(fakeUser);
 
         setLoading(false);
+        APIKit.defaults.headers['Authorization'] = `Bearer ${storedToken}`;
       }
     };
 
     getStorageData();
   }, [])
 
-  async function signIn() {
-    const response = await AuthService.signIn();
-    const { token, user } = response;
-    setUser(user);
+  async function signIn(payload: LoginData) {
+    try {
+      setLoading(true);
+      const response = await AuthService.signIn(payload);
+      const fakeUser: User = { name: 'Will', email: payload.email };
 
-    /** Seta por padrão em todas as requisições um authorizatio no header */
-    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      setUser(fakeUser);
+      const { access_token } = response.data;
 
-    await AsyncStorage.setItem('@authApp:user', JSON.stringify(user));
-    await AsyncStorage.setItem('@authApp:token', token);
+      APIKit.defaults.headers['Authorization'] = `Bearer ${access_token}`;
+      await AsyncStorage.setItem('@authApp:token', access_token);
+      setLoading(false);
+
+    } catch (error) {
+      setLoading(false);
+    }
   }
 
   function signOut() {

@@ -1,16 +1,12 @@
 import styled from "styled-components/native";
 import { COLORS, Typography } from "../../constants";
 import { ButtonProps } from "../../models/components.model";
+import { Form as Unform } from "@unform/mobile";
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background: ${COLORS.background};
   padding: 40px 30px;
-`;
-
-export const FormContainer = styled.View`
-  margin-top: 4px;
-  margin-horizontal: 10px;
 `;
 
 export const BackButton = styled.TouchableOpacity<ButtonProps>`
@@ -49,24 +45,6 @@ export const PasswordRecoveryText = styled.Text`
   font-family: ${Typography.fontFamilyRegular};
 `;
 
-export const InputField = styled.View`
-  margin-top: 20px;
-`;
-
-export const InputLabel = styled.Text`
-  color: ${COLORS.gray};
-  font-family: ${Typography.fontFamilyRegular};
-`;
-
-export const InputText = styled.TextInput`
-  margin-vertical: 3px;
-  border-bottom-color: ${COLORS.gray};
-  color: ${COLORS.text};
-  border-bottom-width: 1px;
-  height: 40px;
-  font-family: ${Typography.fontFamilyRegular};
-`;
-
 export const TogglePasswordButton = styled.TouchableOpacity`
   position: absolute;
   right: 0;
@@ -74,3 +52,16 @@ export const TogglePasswordButton = styled.TouchableOpacity`
   height: 30px;
   width: 30px;
 `;
+
+export const Form = styled(Unform)`
+  margin-top: 4px;
+  margin-horizontal: 10px;
+`;
+
+export const ValidationTextError = styled.Text`
+  color: ${COLORS.danger};
+  font-size: 12px;
+  margin-top: 10px;
+  text-align: right;
+`;
+

@@ -19,6 +19,8 @@ export const COLORS = {
   white: "#FFFFFF",
   lightWhite: "rgba(255, 255, 255, 0.7)",
 
+  danger: "#F01",
+
   gray: "#9b9d9e",
   text: "#6c757d",
 

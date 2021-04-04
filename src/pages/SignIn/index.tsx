@@ -1,38 +1,70 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useRef } from "react";
 import { StatusBar } from "react-native";
+import { FormHandles } from "@unform/core";
 
-import Icon from 'react-native-vector-icons/Entypo';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-
-import {
-  Container,
-  FormContainer,
-  Heading,
-  Subtitle,
-  Title,
-  BackButton,
-  PasswordRecovery,
-  PasswordRecoveryText,
-  InputField,
-  InputLabel,
-  InputText,
-  TogglePasswordButton
-} from './styles';
 
 import { NavigationProps } from "../../models/navigation.models";
 import { COLORS } from "../../constants";
 
 import GradientButton from '../../components/atoms/GradientButton';
 import AuthContext from "../../contexts/auth";
+import Input from "../../components/atoms/form/Input";
+
+import {
+  Container,
+  Heading,
+  Subtitle,
+  Title,
+  BackButton,
+  PasswordRecovery,
+  PasswordRecoveryText,
+  Form,
+  ValidationTextError
+} from './styles';
+
+
+import * as Yup from 'yup';
+import api from "../../services/api";
+
+interface LoginData {
+  email: string;
+  password: string;
+}
 
 const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
   const { signed, signIn } = useContext(AuthContext);
+  const formRef = useRef<FormHandles>(null);
 
-  console.log('User logged? ->', signed);
+  const handleSubmit = useCallback(async (data: LoginData, { reset }: { reset: () => void }) => {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail é obrigatório')
+          .email('Por favor digite um e-mail válido'),
+        password: Yup.string().required('Senha é obrigatória')
+      });
 
-  function handleSignIn() {
-    signIn();
-  }
+      await schema.validate(data, {
+        abortEarly: false
+      });
+
+      signIn(data);
+      formRef.current?.setErrors({});
+      reset();
+
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        error.inner.forEach(error => {
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current?.setErrors(errorMessages);
+      }
+    }
+  }, []);
 
   function renderHeader() {
     return (
@@ -50,48 +82,38 @@ const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
   }
 
   function renderForm() {
-    const [showPassword, setShowPassword] = useState(false);
 
     return (
-      <FormContainer>
+      <Form ref={formRef} onSubmit={handleSubmit}>
 
-        <InputField>
-          <InputLabel>Email</InputLabel>
-          <InputText
-            keyboardType="email-address"
-            placeholderTextColor={COLORS.gray}
-            selectionColor={COLORS.gray}
-          />
-        </InputField>
+        <Input
+          name="email"
+          label="E-mail"
+          autoCorrect={false}
+          autoCapitalize="none"
+          keyboardType="email-address" />
 
-        <InputField>
-          <InputLabel>Senha</InputLabel>
-          <InputText
-            placeholderTextColor={COLORS.gray}
-            selectionColor={COLORS.gray}
-            secureTextEntry={!showPassword}
-          />
-          <TogglePasswordButton onPress={() => setShowPassword(!showPassword)}>
-            <Icon name={showPassword ? 'eye-with-line' : 'eye'}
-              size={18}
-              color={COLORS.primary}
-            />
-          </TogglePasswordButton>
-        </InputField>
+        <Input
+          name="password"
+          label="Senha"
+          type="password" />
+
+        {/* { formRef.current?.getErrors()
+          && <ValidationTextError>Email ou senha incorretos</ValidationTextError>
+        } */}
 
         <PasswordRecovery>
           <PasswordRecoveryText>Esqueceu sua senha?</PasswordRecoveryText>
         </PasswordRecovery>
 
         <GradientButton
-          onPressFn={handleSignIn}
+          onPressFn={() => { formRef.current?.submitForm(); }}
           backgroundColor={COLORS.linear}
-          textColor={COLORS.white}
-        >
+          textColor={COLORS.white}>
           Entrar
         </GradientButton>
 
-      </FormContainer>
+      </Form>
     );
   }
 
