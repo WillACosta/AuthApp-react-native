@@ -6,7 +6,6 @@ export interface PrimaryButtonProps {
 export interface PrimaryButtonTextProps {
   textColor: string;
 }
-
 export interface ThemeButtonProps {
   children: React.ReactNode;
   backgroundColor: string;

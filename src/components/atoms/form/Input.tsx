@@ -1,8 +1,6 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { TextInput, TextInputProps } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { TextInput } from 'react-native';
 import { useField } from '@unform/core';
-
-import Icon from 'react-native-vector-icons/Entypo';
 
 import {
   InputField,
@@ -11,6 +9,8 @@ import {
   TogglePasswordButton,
   ValidationTextError
 } from './styles';
+
+import Icon from 'react-native-vector-icons/Entypo';
 
 import { COLORS } from '../../../constants';
 import { InputProps, InputReference } from '../../../models/components.model';

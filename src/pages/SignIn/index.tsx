@@ -2,14 +2,16 @@ import React, { useCallback, useContext, useRef } from "react";
 import { StatusBar } from "react-native";
 import { FormHandles } from "@unform/core";
 
-import IonIcons from 'react-native-vector-icons/Ionicons';
-
+import { LoginData } from "../../models/pages.model";
 import { NavigationProps } from "../../models/navigation.models";
 import { COLORS } from "../../constants";
 
 import GradientButton from '../../components/atoms/GradientButton';
 import AuthContext from "../../contexts/auth";
 import Input from "../../components/atoms/form/Input";
+
+import IonIcons from 'react-native-vector-icons/Ionicons';
+import * as Yup from 'yup';
 
 import {
   Container,
@@ -19,18 +21,8 @@ import {
   BackButton,
   PasswordRecovery,
   PasswordRecoveryText,
-  Form,
-  ValidationTextError
+  Form
 } from './styles';
-
-
-import * as Yup from 'yup';
-import api from "../../services/api";
-
-interface LoginData {
-  email: string;
-  password: string;
-}
 
 const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
   const { signed, signIn } = useContext(AuthContext);

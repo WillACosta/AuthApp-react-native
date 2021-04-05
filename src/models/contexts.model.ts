@@ -1,13 +1,9 @@
+import { LoginData } from "./pages.model";
+
 export interface User {
   name: string;
   email: string;
 }
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
-
 export interface AuthContextData {
   signed: boolean;
   user: User | null;

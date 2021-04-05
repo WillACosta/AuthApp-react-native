@@ -3,7 +3,6 @@ import styled from "styled-components/native";
 import LinearGradient from 'react-native-linear-gradient';
 
 import {
-  PrimaryButtonProps,
   PrimaryButtonTextProps,
   ThemeButtonProps,
 } from "../../models/components.model";
