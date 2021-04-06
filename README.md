@@ -2,14 +2,14 @@
 
 AuthApp como o próprio nome já diz, é uma aplicação de autenticação desenvolvida em react-native.
 
-<img src="https://i.imgur.com/kaB5ZU4.png" /><br>
-<img src="https://i.imgur.com/DETlbe3.png" />
+<img src="https://i.imgur.com/B085uwu.png" /><br>
 
 ## Execução
 
 Faça o clone deste repositório, navegue até o diretório do projeto e com seu gerenciador de pacotes preferido instale as dependências.
 
 Exemplo utilizando NPM:
+
 ```
 npm install
 ```

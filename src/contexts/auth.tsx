@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as AuthService from "../services/Auth";
 import APIKit, { setClientToken } from '../services/api';
 
-import { AuthContextData, LoginData, User } from '../models/contexts.model';
+import { AuthContextData, User } from '../models/contexts.model';
+import { LoginData } from '../models/pages.model';
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 

@@ -15,7 +15,7 @@ const SplashScreen: React.FC<NavigationProps> = ({ navigation }) => {
     return (
       <>
         <View style={{ alignItems: 'flex-start', marginBottom: 35 }}>
-          <Text style={{ color: COLORS.white, paddingBottom: 20, ...FONTS.h1}}>
+          <Text style={{ color: COLORS.white, paddingBottom: 20, ...FONTS.h1 }}>
             Boas vindas
           </Text>
           <CustomText>À melhor maneira</CustomText>
@@ -42,20 +42,27 @@ const SplashScreen: React.FC<NavigationProps> = ({ navigation }) => {
           <Text style={{ color: COLORS.lightWhite, marginTop: 30, textAlign: 'center' }}>
             Termos de serviço
           </Text>
+
         </View>
       </>
     );
   }
 
   return (
-    <LinearGradient colors={[COLORS.gradientInitial, COLORS.gradientEnd]} style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" backgroundColor={COLORS.gradientInitial} />
-      <Container>
+    <LinearGradient
+      colors={[COLORS.gradientInitial, COLORS.gradientEnd]}
+      style={{ flex: 1 }}>
 
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={COLORS.gradientInitial}
+      />
+
+      <Container>
         {renderHeader()}
         {renderButtons()}
-
       </Container>
+
     </LinearGradient>
   );
 };
