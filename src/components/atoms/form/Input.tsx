@@ -69,7 +69,8 @@ const Input: React.FC<InputProps> = ({ name, label, type, ...rest }) => {
               />
 
               <TogglePasswordButton onPress={() => setShowPassword(!showPassword)}>
-                <Icon name={showPassword ? 'eye-with-line' : 'eye'}
+                <Icon
+                  name={showPassword ? 'eye-with-line' : 'eye'}
                   size={18}
                   color={COLORS.primary}
                 />

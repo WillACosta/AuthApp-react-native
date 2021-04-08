@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useRef } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, ScrollView } from "react-native";
 import { FormHandles } from "@unform/core";
 
 import { LoginData } from "../../models/pages.model";
@@ -9,23 +9,24 @@ import { COLORS } from "../../constants";
 import GradientButton from '../../components/atoms/GradientButton';
 import AuthContext from "../../contexts/auth";
 import Input from "../../components/atoms/form/Input";
+import AvoidingView from '../../components/atoms/AvoidingView';
 
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import * as Yup from 'yup';
 
 import {
-  Container,
   Heading,
   Subtitle,
   Title,
   BackButton,
   PasswordRecovery,
   PasswordRecoveryText,
-  Form
+  Form,
+  ValidationTextError
 } from './styles';
 
 const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
-  const { signed, signIn } = useContext(AuthContext);
+  const { wrongCredentials, signIn } = useContext(AuthContext);
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(async (data: LoginData, { reset }: { reset: () => void }) => {
@@ -90,8 +91,8 @@ const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
           label="Senha"
           type="password" />
 
-        {/* { formRef.current?.getErrors()
-          && <ValidationTextError>Email ou senha incorretos</ValidationTextError>
+        {/* { wrongCredentials &&
+          <ValidationTextError>Email ou senha incorretos</ValidationTextError>
         } */}
 
         <PasswordRecovery>
@@ -112,10 +113,12 @@ const SignIn: React.FC<NavigationProps> = ({ navigation }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.background} />
-      <Container>
-        {renderHeader()}
-        {renderForm()}
-      </Container>
+      <AvoidingView>
+        <ScrollView>
+          {renderHeader()}
+          {renderForm()}
+        </ScrollView>
+      </AvoidingView>
     </>
   );
 };

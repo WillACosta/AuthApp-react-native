@@ -21,15 +21,15 @@ export const InputText = styled.TextInput`
 
 export const TogglePasswordButton = styled.TouchableOpacity`
   position: absolute;
+  top: 20px;
   right: 0;
-  bottom: 10px;
   height: 30px;
   width: 30px;
 `;
 
 export const ValidationTextError = styled.Text`
   color: ${COLORS.danger};
+  top: 10px;
   font-size: 12px;
-  margin-top: 10px;
   text-align: right;
 `;

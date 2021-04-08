@@ -12,6 +12,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const [wrongCredentials, setWrongCredentials] = useState(false);
 
   useEffect(() => {
     async function getStorageData() {
@@ -26,12 +27,15 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
     };
 
+    setLoading(true);
     getStorageData();
   }, [])
 
   async function signIn(payload: LoginData) {
     try {
       setLoading(true);
+      setWrongCredentials(false);
+
       const response = await AuthService.signIn(payload);
       const fakeUser: User = { name: 'Will', email: payload.email };
 
@@ -44,6 +48,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     } catch (error) {
       setLoading(false);
+      setWrongCredentials(true);
     }
   }
 
@@ -52,7 +57,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, user, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ signed: !!user, user, loading, signIn, signOut, wrongCredentials }}>
       {children}
     </AuthContext.Provider>
   )

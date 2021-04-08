@@ -3,6 +3,8 @@ import { COLORS, Typography } from "../../constants";
 import { ButtonProps } from "../../models/components.model";
 import { Form as Unform } from "@unform/mobile";
 
+import { KeyboardAvoidingViewProps } from "react-native";
+
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background: ${COLORS.background};

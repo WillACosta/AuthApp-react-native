@@ -8,6 +8,7 @@ export interface AuthContextData {
   signed: boolean;
   user: User | null;
   loading: boolean;
+  wrongCredentials: boolean;
   signIn(payload: LoginData): Promise<void>;
   signOut(): void;
 }
